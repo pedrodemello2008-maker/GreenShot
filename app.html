@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>GreenShot — App</title>
+    <meta
+      name="description"
+      content="GreenShot — transforme hábitos sustentáveis em recompensas digitais e impacto ambiental real."
+    />
+    <meta name="theme-color" content="#0a1f1a" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/icons/favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/icons/favicon-16.png"
+    />
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,600,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body data-theme="dark" class="is-app">
+    <div class="app-stage">
+      <div class="app-stage__glow" aria-hidden="true"></div>
+
+      <div class="app-frame" id="appFrame">
+        <div id="appViewport">
+          <!-- ============ PWA banners ============ -->
+          <div id="installBanner">
+            <span>Instale o GreenShot na sua tela inicial 🌱</span>
+            <div id="installBanner__actions">
+              <button class="banner-btn" id="installBtn">
+                <span>Instalar</span>
+              </button>
+              <button class="banner-x" id="closeInstallBtn" aria-label="Fechar">
+                ✕
+              </button>
+            </div>
+          </div>
+          <div id="offlineBanner">
+            <span>Você está offline — mostrando dados salvos.</span>
+          </div>
+
+          <div id="appShell">
+            <!-- ============ SIDEBAR (desktop) ============ -->
+            <nav id="sidebar" aria-label="Navegação principal">
+              <a class="sidebar__brand" href="index.html">
+                <img src="assets/logo-greenshot.png" alt="" />
+                <span>GreenShot</span>
+              </a>
+              <div class="sidebar__nav">
+                <button class="tab side-tab is-active" data-go="dashboard">
+                  <span class="tab__icon">🏠</span>Início
+                </button>
+                <button class="tab side-tab" data-go="ecosystem">
+                  <span class="tab__icon">🌳</span>Floresta
+                </button>
+                <button class="tab side-tab" data-go="academy">
+                  <span class="tab__icon">🎓</span>Academia
+                </button>
+                <button class="tab side-tab" data-go="market">
+                  <span class="tab__icon">🤝</span>Mercado
+                </button>
+                <button class="tab side-tab" data-go="profile">
+                  <span class="tab__icon">👤</span>Perfil
+                </button>
+              </div>
+              <div class="sidebar__footer">
+                <button class="sidebar__cta js-open-register" type="button">
+                  <span>📷</span> Registrar ação
+                </button>
+                <a class="sidebar__back" href="index.html"
+                  >← Site institucional</a
+                >
+              </div>
+            </nav>
+
+            <div id="appBody">
+              <!-- ============ SPLASH ============ -->
+              <section
+                class="screen is-active"
+                id="screen-splash"
+                data-nav="none"
+              >
+                <canvas id="splashParticles"></canvas>
+                <div class="splash__content">
+                  <img
+                    src="assets/logo-greenshot.png"
+                    alt=""
+                    class="splash__logo"
+                  />
+                  <h1 class="splash__title">GreenShot</h1>
+                  <p class="splash__slogan">
+                    Do Aprendizado à Realização, com um Legado que Perdura.
+                  </p>
+                </div>
+                <p class="splash__hint">Toque para continuar</p>
+              </section>
+
+              <!-- ============ ONBOARDING ============ -->
+              <section class="screen" id="screen-onboarding" data-nav="none">
+                <div class="ob-slides">
+                  <div class="ob-slide is-active">
+                    <div class="ob-slide__icon">📸</div>
+                    <h2>Registre suas ações</h2>
+                    <p>
+                      Fotografe, escaneie ou marque sua localização a cada
+                      hábito sustentável — reciclagem, transporte limpo,
+                      economia de água e muito mais.
+                    </p>
+                  </div>
+                  <div class="ob-slide">
+                    <div class="ob-slide__icon">🌳</div>
+                    <h2>Veja sua floresta crescer</h2>
+                    <p>
+                      Cada ação alimenta seu ecossistema 3D, que evolui em cinco
+                      estágios permanentes — da terra árida ao Monte Parnaso.
+                    </p>
+                  </div>
+                  <div class="ob-slide">
+                    <div class="ob-slide__icon">🪙</div>
+                    <h2>Troque tokens por impacto real</h2>
+                    <p>
+                      Use os tokens GRST conquistados para investir em projetos
+                      ambientais de verdade, com ONGs parceiras.
+                    </p>
+                  </div>
+                </div>
+                <div class="ob-footer">
+                  <div class="ob-dots">
+                    <span class="ob-dot is-active"></span>
+                    <span class="ob-dot"></span>
+                    <span class="ob-dot"></span>
+                  </div>
+                  <button class="btn btn--primary btn--block" id="obNextBtn">
+                    Próximo
+                  </button>
+                </div>
+              </section>
+
+              <!-- ============ LOGIN ============ -->
+              <section class="screen" id="screen-login" data-nav="none">
+                <div class="screen__body" style="justify-content: center">
+                  <div class="login__head">
+                    <img
+                      src="assets/logo-greenshot.png"
+                      alt=""
+                      class="login__logo"
+                    />
+                    <h2 id="authTitle">Bem-vinda de volta</h2>
+                    <p id="authSubtitle">
+                      Entre para continuar sua jornada sustentável.
+                    </p>
+                  </div>
+                  <form
+                    id="loginForm"
+                    style="display: flex; flex-direction: column; gap: 14px"
+                  >
+                    <div class="field" id="registerNameField" hidden>
+                      <label for="registerName">Nome</label>
+                      <input
+                        id="registerName"
+                        type="text"
+                        autocomplete="name"
+                        placeholder="Como podemos te chamar?"
+                      />
+                    </div>
+                    <div class="field">
+                      <label for="loginEmail">E-mail</label>
+                      <input
+                        id="loginEmail"
+                        type="email"
+                        autocomplete="email"
+                        placeholder="voce@email.com"
+                        required
+                      />
+                    </div>
+                    <div class="field">
+                      <label for="loginPass">Senha</label>
+                      <input
+                        id="loginPass"
+                        type="password"
+                        autocomplete="current-password"
+                        placeholder="••••••••"
+                        required
+                        minlength="6"
+                      />
+                    </div>
+                    <p id="authError" class="login__error" hidden></p>
+                    <button
+                      class="btn btn--primary btn--block"
+                      type="submit"
+                      id="authSubmitBtn"
+                    >
+                      Entrar
+                    </button>
+                    <button
+                      type="button"
+                      id="forgotPassBtn"
+                      class="login__link-btn"
+                    >
+                      Esqueci minha senha
+                    </button>
+                  </form>
+
+                  <div class="login__divider" id="googleDivider">
+                    <span>ou</span>
+                  </div>
+                  <button
+                    type="button"
+                    id="googleLoginBtn"
+                    class="btn btn--ghost btn--block btn--google"
+                  >
+                    <span aria-hidden="true">🔵</span> Continuar com Google
+                  </button>
+
+                  <p class="login__foot">
+                    <span id="authToggleText">Não tem conta?</span>
+                    <a href="#" id="authToggleLink">Cadastre-se</a>
+                  </p>
+                  <p class="login__local-hint" id="localModeHint" hidden>
+                    Modo demonstração local — configure o Firebase em
+                    <code>firebase-config.js</code> para login com conta real e
+                    progresso salvo na nuvem.
+                  </p>
+                </div>
+              </section>
+
+              <!-- ============ DASHBOARD ============ -->
+              <section
+                class="screen"
+                id="screen-dashboard"
+                data-nav="dashboard"
+              >
+                <header class="status-bar">
+                  <span id="clock">9:41</span>
+                  <span class="status-bar__signal">●●●● 5G 100%</span>
+                </header>
+                <div class="app-header">
+                  <div>
+                    <p class="hello" id="dashHello">Olá, Pedro 👋</p>
+                    <h1 class="app-header__title">Dashboard</h1>
+                  </div>
+                  <div class="app-header__actions">
+                    <button
+                      class="icon-btn"
+                      id="themeBtn"
+                      aria-label="Alternar tema"
+                    >
+                      🌓
+                    </button>
+                    <button
+                      class="icon-btn"
+                      id="notifBtn"
+                      aria-label="Notificações"
+                    >
+                      🔔<span class="icon-btn__dot"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="screen__body">
+                  <div class="balance-card">
+                    <span class="balance-card__label">Saldo de tokens</span>
+                    <span class="balance-card__value"
+                      ><span id="statTokens">860</span> <em>GRST</em></span
+                    >
+                  </div>
+                  <div class="xp-card">
+                    <div class="xp-card__top">
+                      <span
+                        >Nível <b id="dashLevel">7</b> — Guardião da Mata</span
+                      >
+                      <span><b id="statXp">0.7k</b> XP</span>
+                    </div>
+                    <div class="xp-bar">
+                      <i class="xp-bar__fill" id="xpFill"></i>
+                    </div>
+                  </div>
+                  <p class="section-title" id="dashQuickTitle">Ações rápidas</p>
+                  <div class="quick-grid">
+                    <button
+                      class="quick-chip js-open-register"
+                      id="openRegisterAction"
+                    >
+                      <span>📷</span> Registrar ação
+                    </button>
+                    <button class="quick-chip" data-go="ecosystem">
+                      <span>🌳</span> Meu ecossistema
+                    </button>
+                    <button class="quick-chip" data-go="academy">
+                      <span>🎓</span> Academia
+                    </button>
+                    <button class="quick-chip" data-go="market">
+                      <span>🤝</span> Mercado de impacto
+                    </button>
+                  </div>
+                  <p class="section-title" id="dashActivityTitle">
+                    Atividade recente
+                  </p>
+                  <div class="activity-list" id="dashActivityList">
+                    <div class="activity-item">
+                      <div class="activity-item__icon">♻️</div>
+                      <div class="activity-item__body">
+                        <strong>Reciclagem registrada</strong>
+                        <span>Hoje, 08:14</span>
+                      </div>
+                      <div class="activity-item__reward">+35 XP</div>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-item__icon">🚲</div>
+                      <div class="activity-item__body">
+                        <strong>Transporte sustentável</strong>
+                        <span>Ontem, 18:42</span>
+                      </div>
+                      <div class="activity-item__reward">+20 GRST</div>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-item__icon">🎓</div>
+                      <div class="activity-item__body">
+                        <strong>Quiz: Descarte Correto</strong>
+                        <span>Ontem, 12:03</span>
+                      </div>
+                      <div class="activity-item__reward">+40 GRST</div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- ============ ECOSSISTEMA ============ -->
+              <section
+                class="screen"
+                id="screen-ecosystem"
+                data-nav="ecosystem"
+              >
+                <header class="status-bar">
+                  <span id="clock">9:41</span>
+                  <span class="status-bar__signal">●●●● 5G 100%</span>
+                </header>
+                <div class="app-header">
+                  <h1 class="app-header__title">Meu Ecossistema</h1>
+                </div>
+                <div class="screen__body">
+                  <div class="eco-canvas-wrap" id="forestStage" data-stage="1">
+                    <span class="eco-canvas-wrap__chip" id="ecoStageChip"
+                      >🌱 Brotando</span
+                    >
+                    <span
+                      class="eco-canvas-wrap__chip eco-canvas-wrap__chip--right"
+                      id="ecoSpeciesChip"
+                      >🐦 2 espécies</span
+                    >
+                    <canvas id="ecoCanvas"></canvas>
+                    <div id="ecoLoading">Carregando o ecossistema 3D…</div>
+                  </div>
+                  <div class="eco-summary">
+                    <div class="eco-summary__cell">
+                      <b id="ecoStageName">Brotando</b>
+                      <span>Estágio</span>
+                    </div>
+                    <div class="eco-summary__cell">
+                      <b id="ecoTrees">5</b>
+                      <span>Árvores</span>
+                    </div>
+                    <div class="eco-summary__cell">
+                      <b id="ecoAnimals">2</b>
+                      <span>Animais</span>
+                    </div>
+                  </div>
+                  <div class="eco-progress">
+                    <div class="eco-progress__top">
+                      <span>Progresso cumulativo</span>
+                      <span id="ecoProgressLabel">30%</span>
+                    </div>
+                    <div class="eco-progress__bar">
+                      <i id="ecoProgressFill" style="width: 30%"></i>
+                    </div>
+                    <input
+                      type="range"
+                      id="ecoProgressSlider"
+                      min="0"
+                      max="100"
+                      value="30"
+                    />
+                    <p class="eco-progress__hint">
+                      No uso real, cada ação (+6) e cada investimento no Mercado
+                      (+3) empurram o progresso — ele nunca regride.
+                    </p>
+                  </div>
+                  <p class="section-title">Estágios</p>
+                  <div class="badges-row" id="ecoStageBadges">
+                    <div class="badge-cell" data-stage="0">
+                      <span>🏜️</span><small>Árida</small>
+                    </div>
+                    <div class="badge-cell" data-stage="1">
+                      <span>🌱</span><small>Brotando</small>
+                    </div>
+                    <div class="badge-cell" data-stage="2">
+                      <span>🏛️</span><small>Jardim</small>
+                    </div>
+                    <div class="badge-cell" data-stage="3">
+                      <span>🌳</span><small>Bosque</small>
+                    </div>
+                    <div class="badge-cell" data-stage="4">
+                      <span>⛰️</span><small>Parnaso</small>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- ============ ACADEMIA ============ -->
+              <section class="screen" id="screen-academy" data-nav="academy">
+                <header class="status-bar">
+                  <span id="clock">9:41</span>
+                  <span class="status-bar__signal">●●●● 5G 100%</span>
+                </header>
+                <div class="app-header">
+                  <h1 class="app-header__title">Academia GreenShot</h1>
+                </div>
+                <div class="screen__body">
+                  <div class="subtabs">
+                    <button class="subtab is-active" data-sub="trilhas">
+                      Trilhas
+                    </button>
+                    <button class="subtab" data-sub="desafios">Desafios</button>
+                  </div>
+
+                  <div id="subTrilhas" class="sub-panel is-active">
+                    <div class="quiz-card">
+                      <span class="quiz-card__icon">🎓</span>
+                      <div class="quiz-card__body">
+                        <strong>Quiz do dia: Descarte Correto</strong>
+                        <span>5 perguntas · +40 GRST</span>
+                      </div>
+                      <button
+                        class="btn btn--primary btn--sm"
+                        id="startQuizBtn"
+                      >
+                        Iniciar
+                      </button>
+                    </div>
+                    <div class="track-item">
+                      <div class="track-item__top">
+                        <div>
+                          <strong>Água &amp; Consumo</strong
+                          ><span>6 módulos</span>
+                        </div>
+                        <span class="pill-reward">+80 GRST</span>
+                      </div>
+                      <div class="mini-bar"><i style="width: 65%"></i></div>
+                    </div>
+                    <div class="track-item">
+                      <div class="track-item__top">
+                        <div>
+                          <strong>Energia limpa em casa</strong
+                          ><span>4 módulos</span>
+                        </div>
+                        <span class="pill-reward">+60 GRST</span>
+                      </div>
+                      <div class="mini-bar"><i style="width: 30%"></i></div>
+                    </div>
+                    <div class="track-item">
+                      <div class="track-item__top">
+                        <div>
+                          <strong>Reciclagem na prática</strong
+                          ><span>5 módulos</span>
+                        </div>
+                        <span class="pill-reward">+70 GRST</span>
+                      </div>
+                      <div class="mini-bar"><i style="width: 100%"></i></div>
+                    </div>
+                    <div class="track-item">
+                      <div class="track-item__top">
+                        <div>
+                          <strong>Mobilidade sustentável</strong
+                          ><span>3 módulos</span>
+                        </div>
+                        <span class="pill-reward">+50 GRST</span>
+                      </div>
+                      <div class="mini-bar"><i style="width: 0%"></i></div>
+                    </div>
+                  </div>
+
+                  <div id="subDesafios" class="sub-panel">
+                    <div class="challenge-item">
+                      <div class="challenge-item__top">
+                        <div>
+                          <strong>Mês sem plástico</strong
+                          ><span>Reduza descartáveis por 30 dias</span>
+                        </div>
+                        <span class="pill-reward">+200 GRST</span>
+                      </div>
+                      <div class="mini-bar"><i style="width: 40%"></i></div>
+                      <div class="challenge-item__meta">
+                        <span>12/30 dias</span><span>328 participantes</span>
+                      </div>
+                    </div>
+                    <div class="challenge-item">
+                      <div class="challenge-item__top">
+                        <div>
+                          <strong>Semana da bike</strong
+                          ><span>7 deslocamentos de bicicleta</span>
+                        </div>
+                        <span class="pill-reward">+90 GRST</span>
+                      </div>
+                      <div class="mini-bar"><i style="width: 70%"></i></div>
+                      <div class="challenge-item__meta">
+                        <span>5/7 dias</span><span>184 participantes</span>
+                      </div>
+                    </div>
+                    <div class="challenge-item">
+                      <div class="challenge-item__top">
+                        <div>
+                          <strong>Compostagem em casa</strong
+                          ><span>Comece uma composteira</span>
+                        </div>
+                        <span class="pill-reward">+120 GRST</span>
+                      </div>
+                      <div class="mini-bar"><i style="width: 10%"></i></div>
+                      <div class="challenge-item__meta">
+                        <span>1/10 dias</span><span>96 participantes</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- ============ MERCADO ============ -->
+              <section class="screen" id="screen-market" data-nav="market">
+                <header class="status-bar">
+                  <span id="clock">9:41</span>
+                  <span class="status-bar__signal">●●●● 5G 100%</span>
+                </header>
+                <div class="app-header">
+                  <h1 class="app-header__title">Mercado de Impacto</h1>
+                </div>
+                <div class="screen__body">
+                  <div class="market-balance">
+                    <span>Seu saldo</span>
+                    <b><span id="marketTokens">860</span> GRST</b>
+                  </div>
+                  <div class="project-item">
+                    <div class="project-item__head">
+                      <div class="project-item__icon">🌊</div>
+                      <div class="project-item__body">
+                        <strong>Instituto Mar Vivo</strong>
+                        <span>Recuperação de recifes de coral</span>
+                      </div>
+                    </div>
+                    <div class="project-item__foot">
+                      <span class="pill-reward">120 GRST</span>
+                      <button class="invest-btn" data-cost="120">
+                        Investir
+                      </button>
+                    </div>
+                  </div>
+                  <div class="project-item">
+                    <div class="project-item__head">
+                      <div class="project-item__icon">🌳</div>
+                      <div class="project-item__body">
+                        <strong>SOS Mata Atlântica</strong>
+                        <span>Reflorestamento com mudas nativas</span>
+                      </div>
+                    </div>
+                    <div class="project-item__foot">
+                      <span class="pill-reward">80 GRST</span>
+                      <button class="invest-btn" data-cost="80">
+                        Investir
+                      </button>
+                    </div>
+                  </div>
+                  <div class="project-item">
+                    <div class="project-item__head">
+                      <div class="project-item__icon">♻️</div>
+                      <div class="project-item__body">
+                        <strong>Coopera Verde</strong>
+                        <span>Cooperativas de catadores e reciclagem</span>
+                      </div>
+                    </div>
+                    <div class="project-item__foot">
+                      <span class="pill-reward">60 GRST</span>
+                      <button class="invest-btn" data-cost="60">
+                        Investir
+                      </button>
+                    </div>
+                  </div>
+                  <div class="project-item">
+                    <div class="project-item__head">
+                      <div class="project-item__icon">💧</div>
+                      <div class="project-item__body">
+                        <strong>Água para Todos</strong>
+                        <span>Poços e captação de água em comunidades</span>
+                      </div>
+                    </div>
+                    <div class="project-item__foot">
+                      <span class="pill-reward">150 GRST</span>
+                      <button class="invest-btn" data-cost="150">
+                        Investir
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- ============ PERFIL ============ -->
+              <section class="screen" id="screen-profile" data-nav="profile">
+                <header class="status-bar">
+                  <span id="clock">9:41</span>
+                  <span class="status-bar__signal">●●●● 5G 100%</span>
+                </header>
+                <div class="app-header">
+                  <h1 class="app-header__title">Perfil</h1>
+                </div>
+                <div class="screen__body">
+                  <div class="profile-head">
+                    <div class="profile-avatar" id="profileAvatar">P</div>
+                    <strong id="profileName">Pedro Oliveira</strong>
+                    <span id="profileEmail" class="profile-email"></span>
+                    <span
+                      >Guardião da Mata · Nível
+                      <span id="profileLevel">7</span></span
+                    >
+                  </div>
+                  <div class="profile-stats">
+                    <div class="eco-summary__cell">
+                      <b>128</b><span>Ações</span>
+                    </div>
+                    <div class="eco-summary__cell">
+                      <b>34</b><span>Dias seguidos</span>
+                    </div>
+                    <div class="eco-summary__cell">
+                      <b>96kg</b><span>CO₂ evitado</span>
+                    </div>
+                  </div>
+                  <p class="section-title">Conquistas</p>
+                  <div class="achv-grid">
+                    <div class="achv unlocked">🌱</div>
+                    <div class="achv unlocked">♻️</div>
+                    <div class="achv unlocked">🚲</div>
+                    <div class="achv">🏆</div>
+                    <div class="achv">🌊</div>
+                    <div class="achv">🔥</div>
+                    <div class="achv">⭐</div>
+                    <div class="achv">🌍</div>
+                  </div>
+                  <p class="section-title">Preferências</p>
+                  <div class="settings-list">
+                    <div class="setting-row">
+                      <span>Modo escuro</span>
+                      <button
+                        class="switch is-on"
+                        id="profileThemeSwitch"
+                        aria-label="Alternar modo escuro"
+                      ></button>
+                    </div>
+                    <div class="setting-row">
+                      <span>Notificações push</span>
+                      <button class="switch is-on"></button>
+                    </div>
+                    <div class="setting-row">
+                      <span>Lembrete diário</span>
+                      <button class="switch"></button>
+                    </div>
+                  </div>
+                  <button class="btn btn--ghost btn--block" id="restartBtn">
+                    Reiniciar demonstração
+                  </button>
+                  <button
+                    class="btn btn--ghost btn--block"
+                    id="logoutBtn"
+                    hidden
+                  >
+                    Sair da conta
+                  </button>
+                  <a
+                    class="btn btn--ghost btn--block profile-back-link"
+                    href="index.html"
+                    >← Voltar ao site</a
+                  >
+                </div>
+              </section>
+            </div>
+          </div>
+          <!-- /#appShell -->
+
+          <!-- ============ TABBAR (mobile) ============ -->
+          <nav id="tabbar">
+            <button class="tab is-active" data-go="dashboard">
+              <span class="tab__icon">🏠</span>Início
+            </button>
+            <button class="tab" data-go="ecosystem">
+              <span class="tab__icon">🌳</span>Floresta
+            </button>
+            <button class="tab" data-go="academy">
+              <span class="tab__icon">🎓</span>Academia
+            </button>
+            <button class="tab" data-go="market">
+              <span class="tab__icon">🤝</span>Mercado
+            </button>
+            <button class="tab" data-go="profile">
+              <span class="tab__icon">👤</span>Perfil
+            </button>
+          </nav>
+
+          <!-- ============ NOTIFICAÇÕES ============ -->
+          <div id="notifPanel">
+            <div class="notif-item">
+              <span class="notif-item__icon">🌳</span>
+              <div>
+                <strong>Sua floresta evoluiu!</strong
+                ><span>Estágio Brotando desbloqueado</span>
+              </div>
+            </div>
+            <div class="notif-item">
+              <span class="notif-item__icon">🎓</span>
+              <div>
+                <strong>Novo desafio disponível</strong
+                ><span>Mês sem plástico — +200 GRST</span>
+              </div>
+            </div>
+            <div class="notif-item">
+              <span class="notif-item__icon">🪙</span>
+              <div>
+                <strong>Tokens recebidos</strong
+                ><span>+20 GRST por transporte sustentável</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ TOAST ============ -->
+          <div id="toast"></div>
+
+          <!-- ============ REGISTRAR AÇÃO (bottom sheet) ============ -->
+          <div id="sheetOverlay">
+            <div class="sheet">
+              <div class="sheet__handle"></div>
+              <div class="sheet__head">
+                <h3>Registrar ação</h3>
+                <button
+                  class="sheet__close"
+                  id="closeSheet"
+                  aria-label="Fechar"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div id="sheetStep1" class="sheet__list">
+                <button class="act-item" data-act="reciclagem">
+                  <span>♻️</span>
+                  <div>
+                    <strong>Reciclagem</strong
+                    ><small>Separação e descarte correto</small>
+                  </div>
+                </button>
+                <button class="act-item" data-act="transporte">
+                  <span>🚲</span>
+                  <div>
+                    <strong>Transporte sustentável</strong
+                    ><small>Bike, a pé ou transporte público</small>
+                  </div>
+                </button>
+                <button class="act-item" data-act="agua">
+                  <span>💧</span>
+                  <div>
+                    <strong>Economia de água</strong
+                    ><small>Redução de consumo</small>
+                  </div>
+                </button>
+                <button class="act-item" data-act="energia">
+                  <span>⚡</span>
+                  <div>
+                    <strong>Energia limpa</strong
+                    ><small>Uso consciente ou renovável</small>
+                  </div>
+                </button>
+                <button class="act-item" data-act="compostagem">
+                  <span>🌱</span>
+                  <div>
+                    <strong>Compostagem</strong
+                    ><small>Resíduos orgânicos</small>
+                  </div>
+                </button>
+                <button
+                  class="btn btn--primary btn--block"
+                  id="toStep2"
+                  disabled
+                  style="margin-top: 6px"
+                >
+                  Continuar
+                </button>
+              </div>
+
+              <div id="sheetStep2" class="sheet__list" style="display: none">
+                <button class="proof-opt" data-proof="foto">
+                  <span>📸</span>
+                  <div>
+                    <strong>Foto da evidência</strong
+                    ><small>Tire uma foto da ação</small>
+                  </div>
+                </button>
+                <button class="proof-opt" data-proof="qr">
+                  <span>🔳</span>
+                  <div>
+                    <strong>Scanner de QR Code</strong
+                    ><small>Em parceiros credenciados</small>
+                  </div>
+                </button>
+                <button class="proof-opt" data-proof="geo">
+                  <span>📍</span>
+                  <div>
+                    <strong>Geolocalização</strong
+                    ><small>Confirmar presença no local</small>
+                  </div>
+                </button>
+                <div class="sheet__actions">
+                  <button class="btn btn--ghost" id="backStep1">Voltar</button>
+                  <button
+                    class="btn btn--primary btn--block"
+                    id="submitAction"
+                    disabled
+                  >
+                    Enviar
+                  </button>
+                </div>
+              </div>
+
+              <div id="sheetStep3" style="display: none">
+                <div class="sheet__success">
+                  <span class="sheet__success-icon">🎉</span>
+                  <h3>Ação validada!</h3>
+                  <p
+                    style="margin: 0; color: var(--text-3); font-size: 0.85rem"
+                  >
+                    Sua floresta e seu saldo já foram atualizados.
+                  </p>
+                  <div class="sheet__success-rewards">
+                    <span>+35 XP</span>
+                    <span>+20 GRST</span>
+                  </div>
+                  <button
+                    class="btn btn--primary btn--block"
+                    id="finishAction"
+                    style="margin-top: 6px"
+                  >
+                    Concluir
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ QUIZ ============ -->
+          <div id="quizOverlay">
+            <div class="quiz-modal">
+              <div class="quiz-modal__head">
+                <div>
+                  <h3>Quiz: Descarte Correto</h3>
+                  <span id="quizProgressLabel">Pergunta 1 de 5</span>
+                </div>
+                <button class="sheet__close" id="closeQuiz" aria-label="Fechar">
+                  ✕
+                </button>
+              </div>
+              <div class="quiz-modal__bar">
+                <i id="quizProgressFill" style="width: 20%"></i>
+              </div>
+
+              <div id="quizPlay">
+                <p class="quiz-question" id="quizQuestion"></p>
+                <div class="quiz-options" id="quizOptions"></div>
+                <p
+                  class="quiz-explain"
+                  id="quizExplain"
+                  style="display: none"
+                ></p>
+                <button
+                  class="btn btn--primary btn--block"
+                  id="quizNextBtn"
+                  disabled
+                >
+                  Confirmar
+                </button>
+              </div>
+
+              <div id="quizResults" style="display: none">
+                <div class="sheet__success">
+                  <span class="sheet__success-icon" id="quizResultIcon"
+                    >🎉</span
+                  >
+                  <h3 id="quizResultTitle">Mandou bem!</h3>
+                  <p
+                    id="quizResultText"
+                    style="margin: 0; color: var(--text-3); font-size: 0.85rem"
+                  ></p>
+                  <div class="sheet__success-rewards">
+                    <span id="quizRewardXp">+40 XP</span>
+                    <span id="quizRewardTokens">+40 GRST</span>
+                  </div>
+                  <button
+                    class="btn btn--primary btn--block"
+                    id="closeQuizResults"
+                    style="margin-top: 6px"
+                  >
+                    Concluir
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="ecosystem-3d.js"></script>
+
+    <!-- Firebase (Auth + Firestore) — veja firebase-config.js para colar suas chaves -->
+    <script src="https://www.gstatic.com/firebasejs/12.16.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.16.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="firebase.js"></script>
+
+    <script src="app.js"></script>
+  </body>
+</html>

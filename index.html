@@ -1,0 +1,1111 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GreenShot — Transforme hábitos sustentáveis em impacto real</title>
+    <meta
+      name="description"
+      content="GreenShot é o ecossistema digital gamificado que conecta seus hábitos sustentáveis a recompensas em tokens e investimentos reais em preservação ambiental, com Realidade Aumentada."
+    />
+    <meta
+      property="og:title"
+      content="GreenShot — Do Aprendizado à Realização, com um Legado que Perdura."
+    />
+    <meta
+      property="og:description"
+      content="Ganhe recompensas, acompanhe seu impacto ambiental e ajude a regenerar o planeta através da tecnologia."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#0a1f1a" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,600,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-theme="dark">
+    <!-- ============ CURSOR GLOW (desktop only, decorative) ============ -->
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <!-- ============ SKIP LINK ============ -->
+    <a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+    <!-- ============ NAVBAR ============ -->
+    <header class="nav" id="nav">
+      <div class="nav__inner">
+        <a href="#top" class="nav__brand" aria-label="GreenShot, início">
+          <img
+            src="assets/logo-greenshot.png"
+            alt=""
+            class="nav__logo"
+            width="36"
+            height="40"
+          />
+          <span>GreenShot</span>
+        </a>
+
+        <nav class="nav__links" aria-label="Navegação principal">
+          <a href="#sobre">Sobre</a>
+          <a href="#como-funciona">Como Funciona</a>
+          <a href="#funcionalidades">Funcionalidades</a>
+          <a href="#empresas">Empresas</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="nav__actions">
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Alternar para modo claro"
+            aria-pressed="false"
+          >
+            <svg
+              class="icon-sun"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="4.2"
+                stroke="currentColor"
+                stroke-width="1.8"
+              />
+              <path
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"
+              />
+            </svg>
+            <svg
+              class="icon-moon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+                d="M20.5 14.2a8.5 8.5 0 1 1-9.7-11 7 7 0 0 0 9.7 11Z"
+              />
+            </svg>
+          </button>
+          <a href="app.html" class="btn btn--sm btn--primary">Abrir App</a>
+          <button
+            class="nav__burger"
+            id="navBurger"
+            type="button"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#sobre">Sobre</a>
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#empresas">Empresas</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#faq">FAQ</a>
+        <a href="app.html" class="btn btn--primary btn--block">Abrir App</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="top">
+        <canvas
+          class="hero__particles"
+          id="particleCanvas"
+          aria-hidden="true"
+        ></canvas>
+        <div class="hero__glow hero__glow--a" aria-hidden="true"></div>
+        <div class="hero__glow hero__glow--b" aria-hidden="true"></div>
+
+        <div class="hero__content container">
+          <p class="eyebrow reveal" data-reveal>
+            <span class="eyebrow__dot"></span> Ecossistema digital de impacto
+            socioambiental
+          </p>
+          <h1 class="hero__title reveal" data-reveal>
+            Transforme hábitos<br />
+            sustentáveis em <span class="text-gradient">impacto real.</span>
+          </h1>
+          <p class="hero__subtitle reveal" data-reveal>
+            Ganhe recompensas, acompanhe seu impacto ambiental e ajude a
+            regenerar o planeta através da tecnologia — uma floresta digital que
+            cresce junto com você.
+          </p>
+          <div class="hero__actions reveal" data-reveal>
+            <a href="#cta-final" class="btn btn--primary btn--lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 3v13m0 0-4.5-4.5M12 16l4.5-4.5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M4 19.5h16"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Baixar Aplicativo
+            </a>
+            <a href="#sobre" class="btn btn--ghost btn--lg"
+              >Conheça o Projeto</a
+            >
+          </div>
+
+          <p class="hero__slogan reveal" data-reveal>
+            “Do Aprendizado à Realização, com um Legado que Perdura.”
+          </p>
+        </div>
+
+        <!-- Signature element: growing digital forest -->
+        <div class="forest" id="forestWrap" aria-hidden="true">
+          <div class="forest__ground"></div>
+          <svg
+            class="forest__svg"
+            id="forestSvg"
+            viewBox="0 0 1440 320"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient id="treeGrad" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#0B3B2E" />
+                <stop offset="55%" stop-color="#12734F" />
+                <stop offset="100%" stop-color="#7CF2B0" />
+              </linearGradient>
+            </defs>
+            <g id="forestGroup" fill="url(#treeGrad)"></g>
+          </svg>
+        </div>
+
+        <a href="#sobre" class="scroll-cue" aria-label="Rolar para baixo">
+          <span></span>
+        </a>
+      </section>
+
+      <!-- ============ SOBRE O PROJETO ============ -->
+      <section class="section" id="sobre">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow reveal" data-reveal>
+              <span class="eyebrow__dot"></span> Sobre o projeto
+            </p>
+            <h2 class="reveal" data-reveal>
+              Sustentabilidade que se
+              <span class="text-gradient">vê, sente e recompensa.</span>
+            </h2>
+            <p class="section__lead reveal" data-reveal>
+              O GreenShot transforma ações sustentáveis em recompensas digitais
+              e investimentos reais em preservação ambiental, através de uma
+              experiência gamificada e interativa. Cada boa escolha alimenta um
+              ecossistema vivo — uma floresta ou oceano em Realidade Aumentada —
+              que espelha diretamente os seus hábitos.
+            </p>
+          </div>
+
+          <div class="grid grid--4">
+            <article class="card card--about reveal" data-reveal>
+              <div class="card__icon">🌱</div>
+              <h3>Sustentabilidade</h3>
+              <p>
+                Reciclagem, economia de água e energia, consumo consciente —
+                cada ação vira parte da sua rotina.
+              </p>
+            </article>
+            <article class="card card--about reveal" data-reveal>
+              <div class="card__icon">🎮</div>
+              <h3>Gamificação</h3>
+              <p>
+                Sua floresta cresce e ganha vida quando você acerta, e murcha
+                quando desperdiça. Uma jornada, não uma planilha.
+              </p>
+            </article>
+            <article class="card card--about reveal" data-reveal>
+              <div class="card__icon">💰</div>
+              <h3>Tokens Digitais</h3>
+              <p>
+                Boas escolhas e trilhas concluídas geram tokens — valor real
+                investido automaticamente em preservação.
+              </p>
+            </article>
+            <article class="card card--about reveal" data-reveal>
+              <div class="card__icon">🌎</div>
+              <h3>Impacto Ambiental</h3>
+              <p>
+                Acompanhe, com transparência total, exatamente onde e como seu
+                esforço regenera o planeta.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ COMO FUNCIONA ============ -->
+      <section class="section section--alt" id="como-funciona">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow reveal" data-reveal>
+              <span class="eyebrow__dot"></span> O ciclo GreenShot
+            </p>
+            <h2 class="reveal" data-reveal>
+              Como funciona, em <span class="text-gradient">cinco passos.</span>
+            </h2>
+          </div>
+
+          <ol class="timeline">
+            <li class="timeline__item reveal" data-reveal>
+              <div class="timeline__marker"><span>01</span></div>
+              <div class="timeline__body">
+                <h3>Realize ações sustentáveis</h3>
+                <p>
+                  Reciclagem, economia de água, escolha da bicicleta em vez do
+                  carro, consumo consciente no dia a dia.
+                </p>
+              </div>
+            </li>
+            <li class="timeline__item reveal" data-reveal>
+              <div class="timeline__marker"><span>02</span></div>
+              <div class="timeline__body">
+                <h3>Registre sua ação</h3>
+                <p>
+                  Envio de fotos, leitura de QR Codes de produtos parceiros ou
+                  validação por geolocalização.
+                </p>
+              </div>
+            </li>
+            <li class="timeline__item reveal" data-reveal>
+              <div class="timeline__marker"><span>03</span></div>
+              <div class="timeline__body">
+                <h3>Ganhe tokens</h3>
+                <p>
+                  Cada ação validada e cada trilha educativa concluída alimenta
+                  seu sistema de recompensas digitais.
+                </p>
+              </div>
+            </li>
+            <li class="timeline__item reveal" data-reveal>
+              <div class="timeline__marker"><span>04</span></div>
+              <div class="timeline__body">
+                <h3>Faça a diferença</h3>
+                <p>
+                  A plataforma direciona seus tokens automaticamente para
+                  instituições de preservação parceiras.
+                </p>
+              </div>
+            </li>
+            <li class="timeline__item reveal" data-reveal>
+              <div class="timeline__marker"><span>05</span></div>
+              <div class="timeline__body">
+                <h3>Veja seu impacto crescer</h3>
+                <p>
+                  Sua floresta digital em Realidade Aumentada evolui, ganha
+                  novos habitantes e reflete sua jornada.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ FUNCIONALIDADES ============ -->
+      <section class="section" id="funcionalidades">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow reveal" data-reveal>
+              <span class="eyebrow__dot"></span> Dentro do app
+            </p>
+            <h2 class="reveal" data-reveal>
+              Cinco telas.
+              <span class="text-gradient">Uma jornada completa.</span>
+            </h2>
+            <p class="section__lead reveal" data-reveal>
+              Da tela inicial ao impacto real — conheça a arquitetura de
+              experiência do GreenShot.
+            </p>
+          </div>
+
+          <div class="phone-showcase reveal" data-reveal>
+            <div
+              class="phone-showcase__tabs"
+              id="phoneTabs"
+              role="tablist"
+              aria-label="Funcionalidades do aplicativo"
+            >
+              <button
+                class="phone-tab is-active"
+                role="tab"
+                aria-selected="true"
+                data-target="tab-dashboard"
+              >
+                <span class="phone-tab__num">01</span> Dashboard Inteligente
+              </button>
+              <button
+                class="phone-tab"
+                role="tab"
+                aria-selected="false"
+                data-target="tab-ra"
+              >
+                <span class="phone-tab__num">02</span> Meu Ecossistema (RA)
+              </button>
+              <button
+                class="phone-tab"
+                role="tab"
+                aria-selected="false"
+                data-target="tab-registros"
+              >
+                <span class="phone-tab__num">03</span> Central de Registros
+              </button>
+              <button
+                class="phone-tab"
+                role="tab"
+                aria-selected="false"
+                data-target="tab-academia"
+              >
+                <span class="phone-tab__num">04</span> Academia GreenShot
+              </button>
+              <button
+                class="phone-tab"
+                role="tab"
+                aria-selected="false"
+                data-target="tab-mercado"
+              >
+                <span class="phone-tab__num">05</span> Mercado de Impacto
+              </button>
+            </div>
+
+            <div class="phone-showcase__stage">
+              <div class="phone-frame">
+                <div class="phone-frame__notch"></div>
+                <div class="phone-frame__screen" id="phoneScreen">
+                  <div class="phone-screen is-active" id="tab-dashboard">
+                    <div class="ps-status">
+                      <span>9:41</span><span>●●●●</span>
+                    </div>
+                    <p class="ps-eyebrow">Olá, Pedro 👋</p>
+                    <div class="ps-balance">
+                      <span class="ps-balance__label">Saldo de tokens</span>
+                      <span class="ps-balance__value">2.480 <em>GRST</em></span>
+                    </div>
+                    <div class="ps-progress">
+                      <div class="ps-progress__top">
+                        <span>Nível 7 — Guardiã da Mata</span><span>72%</span>
+                      </div>
+                      <div class="ps-progress__bar">
+                        <i style="width: 72%"></i>
+                      </div>
+                    </div>
+                    <div class="ps-shortcuts">
+                      <div class="ps-chip">📷 Registrar</div>
+                      <div class="ps-chip">🌲 Floresta</div>
+                      <div class="ps-chip">🎓 Academia</div>
+                      <div class="ps-chip">🤝 Doar</div>
+                    </div>
+                  </div>
+
+                  <div class="phone-screen" id="tab-ra">
+                    <div class="ps-status">
+                      <span>9:41</span><span>●●●●</span>
+                    </div>
+                    <div class="ps-ra">
+                      <div class="ps-ra__badge">RA ATIVA</div>
+                      <div class="ps-ra__forest">🌳🌲🌳🦋🌿🌲🌳</div>
+                      <p class="ps-ra__caption">
+                        Sua floresta ganhou <strong>+3 espécies</strong> essa
+                        semana
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="phone-screen" id="tab-registros">
+                    <div class="ps-status">
+                      <span>9:41</span><span>●●●●</span>
+                    </div>
+                    <p class="ps-eyebrow">Central de Registros</p>
+                    <div class="ps-reg">
+                      <div class="ps-reg__row">
+                        📸 <span>Foto da evidência</span>
+                      </div>
+                      <div class="ps-reg__row">
+                        🔳 <span>Scanner de QR Code</span>
+                      </div>
+                      <div class="ps-reg__row">
+                        📍 <span>Geolocalização</span>
+                      </div>
+                    </div>
+                    <div class="ps-reg__status">Validando com IA…</div>
+                  </div>
+
+                  <div class="phone-screen" id="tab-academia">
+                    <div class="ps-status">
+                      <span>9:41</span><span>●●●●</span>
+                    </div>
+                    <p class="ps-eyebrow">Academia GreenShot</p>
+                    <div class="ps-academy">
+                      <div class="ps-academy__item">
+                        <span>Trilha: Água &amp; Consumo</span><b>+80 GRST</b>
+                      </div>
+                      <div class="ps-academy__item">
+                        <span>Quiz: Descarte Correto</span><b>+40 GRST</b>
+                      </div>
+                      <div class="ps-academy__item">
+                        <span>Desafio: Mês Sem Plástico</span><b>+200 GRST</b>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="phone-screen" id="tab-mercado">
+                    <div class="ps-status">
+                      <span>9:41</span><span>●●●●</span>
+                    </div>
+                    <p class="ps-eyebrow">Mercado de Impacto</p>
+                    <div class="ps-market">
+                      <div class="ps-market__item">
+                        <span>🌊 Instituto Mar Vivo</span
+                        ><small>Recife de corais</small>
+                      </div>
+                      <div class="ps-market__item">
+                        <span>🌳 SOS Mata Atlântica</span
+                        ><small>Reflorestamento</small>
+                      </div>
+                      <div class="ps-market__item">
+                        <span>♻️ Coopera Verde</span
+                        ><small>Cooperativas de reciclagem</small>
+                      </div>
+                    </div>
+                    <button class="ps-donate">Transferir tokens</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="phone-showcase__desc" id="phoneDesc">
+                <h3 id="phoneDescTitle">Dashboard Inteligente</h3>
+                <p id="phoneDescText">
+                  Perfil, nível do usuário, saldo de tokens e barra de progresso
+                  — sua jornada sustentável em um só lugar.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ BENEFÍCIOS / STATS ============ -->
+      <section class="section section--stats" id="beneficios">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow reveal" data-reveal>
+              <span class="eyebrow__dot"></span> Números que crescem com a
+              comunidade
+            </p>
+            <h2 class="reveal" data-reveal>
+              Impacto <span class="text-gradient">mensurável.</span>
+            </h2>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat reveal" data-reveal>
+              <span class="stat__value" data-count="100" data-suffix="%"
+                >0%</span
+              >
+              <span class="stat__label">Transparência</span>
+            </div>
+            <div class="stat reveal" data-reveal>
+              <span class="stat__value" data-count="500" data-prefix="+"
+                >0</span
+              >
+              <span class="stat__label">Projetos Ambientais</span>
+            </div>
+            <div class="stat reveal" data-reveal>
+              <span class="stat__value" data-count="10000" data-prefix="+"
+                >0</span
+              >
+              <span class="stat__label">Usuários Engajados</span>
+            </div>
+            <div class="stat reveal" data-reveal>
+              <span
+                class="stat__value"
+                data-count="1"
+                data-prefix="+"
+                data-suffix=" milhão"
+                >0</span
+              >
+              <span class="stat__label">Tokens Convertidos em Impacto</span>
+            </div>
+          </div>
+          <p class="stats-note reveal" data-reveal>
+            Números ilustrativos de projeção de crescimento da comunidade
+            GreenShot.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ IMPACTO SOCIOECONÔMICO ============ -->
+      <section class="section" id="impacto">
+        <div class="container">
+          <div class="grid grid--split">
+            <div class="reveal" data-reveal>
+              <p class="eyebrow">
+                <span class="eyebrow__dot"></span> Além do app
+              </p>
+              <h2>
+                Impacto <span class="text-gradient">socioeconômico</span> real
+              </h2>
+              <p class="section__lead" style="margin-top: 1rem">
+                O GreenShot apresenta impactos relevantes ao tornar a
+                sustentabilidade mais acessível, prática e incentivada no
+                cotidiano — conectando educação ambiental, inclusão social e
+                benefícios econômicos em um único ecossistema.
+              </p>
+            </div>
+
+            <div class="impact-list">
+              <div class="impact-item reveal" data-reveal>
+                <div class="impact-item__icon">📚</div>
+                <div>
+                  <h3>Educação ambiental</h3>
+                  <p>
+                    Trilhas e quizzes que traduzem temas complexos em
+                    aprendizado prático e interativo.
+                  </p>
+                </div>
+              </div>
+              <div class="impact-item reveal" data-reveal>
+                <div class="impact-item__icon">🛒</div>
+                <div>
+                  <h3>Consumo consciente</h3>
+                  <p>
+                    Incentivo financeiro claro para escolhas do dia a dia —
+                    reduzindo desperdício de forma tangível.
+                  </p>
+                </div>
+              </div>
+              <div class="impact-item reveal" data-reveal>
+                <div class="impact-item__icon">💹</div>
+                <div>
+                  <h3>Economia verde</h3>
+                  <p>
+                    Direcionamento de investimentos reais para projetos
+                    ambientais, gerando emprego e inovação.
+                  </p>
+                </div>
+              </div>
+              <div class="impact-item reveal" data-reveal>
+                <div class="impact-item__icon">🤝</div>
+                <div>
+                  <h3>Inclusão social</h3>
+                  <p>
+                    Aproximação entre comunidades, cooperativas e instituições
+                    de preservação parceiras.
+                  </p>
+                </div>
+              </div>
+              <div class="impact-item reveal" data-reveal>
+                <div class="impact-item__icon">🚀</div>
+                <div>
+                  <h3>Geração de oportunidades</h3>
+                  <p>
+                    Novos elos entre tecnologia, ONGs e empresas movimentam a
+                    economia de impacto.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PARA EMPRESAS (B2B) ============ -->
+      <section class="section section--empresas" id="empresas">
+        <div class="empresas__glow" aria-hidden="true"></div>
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow reveal" data-reveal>
+              <span class="eyebrow__dot"></span> GreenShot for Business
+            </p>
+            <h2 class="reveal" data-reveal>
+              Transforme <span class="text-gradient">ESG</span> em resultados
+              reais.
+            </h2>
+            <p class="section__lead reveal" data-reveal>
+              Um módulo B2B completo para empresas comprometidas com metas ESG
+              engajarem colaboradores e mensurarem impacto socioambiental com
+              dados reais.
+            </p>
+          </div>
+
+          <div class="grid grid--4">
+            <article class="card card--glass reveal" data-reveal>
+              <div class="card__icon">👥</div>
+              <h3>Engajamento de colaboradores</h3>
+              <p>
+                Campanhas gamificadas internas que conectam times a metas de
+                sustentabilidade.
+              </p>
+            </article>
+            <article class="card card--glass reveal" data-reveal>
+              <div class="card__icon">📊</div>
+              <h3>Relatórios ESG</h3>
+              <p>
+                Métricas consolidadas e rastreáveis prontas para auditoria e
+                comunicação institucional.
+              </p>
+            </article>
+            <article class="card card--glass reveal" data-reveal>
+              <div class="card__icon">📣</div>
+              <h3>Campanhas ambientais</h3>
+              <p>
+                Desafios sazonais como o "Mês Sem Plástico" para engajar
+                clientes e colaboradores.
+              </p>
+            </article>
+            <article class="card card--glass reveal" data-reveal>
+              <div class="card__icon">📈</div>
+              <h3>Métricas em tempo real</h3>
+              <p>
+                Painel de transparência com valor doado e área preservada,
+                atualizado continuamente.
+              </p>
+            </article>
+          </div>
+
+          <div class="empresas__cta reveal" data-reveal>
+            <a href="#cta-final" class="btn btn--primary btn--lg"
+              >Falar com Nossa Equipe</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DIFERENCIAIS ============ -->
+      <section class="section" id="diferenciais">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow reveal" data-reveal>
+              <span class="eyebrow__dot"></span> Comparativo de mercado
+            </p>
+            <h2 class="reveal" data-reveal>
+              Por que <span class="text-gradient">GreenShot?</span>
+            </h2>
+          </div>
+
+          <div class="compare reveal" data-reveal>
+            <table class="compare__table">
+              <thead>
+                <tr>
+                  <th scope="col">Recurso</th>
+                  <th scope="col" class="compare__us">GreenShot</th>
+                  <th scope="col">Concorrentes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Gamificação</th>
+                  <td class="compare__us">
+                    <span class="tag tag--yes">Completa</span>
+                  </td>
+                  <td><span class="tag tag--mid">Parcial</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Tokens Reais</th>
+                  <td class="compare__us">
+                    <span class="tag tag--yes">Sim</span>
+                  </td>
+                  <td><span class="tag tag--mid">Raro</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Realidade Aumentada</th>
+                  <td class="compare__us">
+                    <span class="tag tag--yes">Sim</span>
+                  </td>
+                  <td><span class="tag tag--no">Não</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">ESG Corporativo</th>
+                  <td class="compare__us">
+                    <span class="tag tag--yes">Completo</span>
+                  </td>
+                  <td><span class="tag tag--mid">Limitado</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Educação Ambiental</th>
+                  <td class="compare__us">
+                    <span class="tag tag--yes">Aprofundada</span>
+                  </td>
+                  <td><span class="tag tag--mid">Básica</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DEPOIMENTOS ============ -->
+      <section class="section section--alt" id="depoimentos">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow reveal" data-reveal>
+              <span class="eyebrow__dot"></span> Quem já planta com a gente
+            </p>
+            <h2 class="reveal" data-reveal>
+              Vozes do <span class="text-gradient">ecossistema.</span>
+            </h2>
+          </div>
+
+          <div class="grid grid--3">
+            <figure class="testimonial reveal" data-reveal>
+              <blockquote>
+                “Troquei o carro pela bike três vezes por semana só para ver
+                minha floresta crescer. Hoje já perdi a conta de quantas árvores
+                plantei sem perceber.”
+              </blockquote>
+              <figcaption>
+                <div class="avatar" aria-hidden="true">PO</div>
+                <div>
+                  <strong>Pedro Oliveira</strong
+                  ><span>Programador, 17 anos</span>
+                </div>
+              </figcaption>
+            </figure>
+            <figure class="testimonial reveal" data-reveal>
+              <blockquote>
+                “Como ONG parceira, o painel de rastreabilidade mudou nossa
+                relação com doadores: eles veem exatamente onde cada token vira
+                mudas plantadas.”
+              </blockquote>
+              <figcaption>
+                <div class="avatar" aria-hidden="true">IM</div>
+                <div>
+                  <strong>Instituto Mar Vivo</strong><span>ONG parceira</span>
+                </div>
+              </figcaption>
+            </figure>
+            <figure class="testimonial reveal" data-reveal>
+              <blockquote>
+                “Implementamos o GreenShot for Business e o engajamento nas
+                campanhas ESG triplicou. Os relatórios prontos economizam
+                semanas da nossa equipe.”
+              </blockquote>
+              <figcaption>
+                <div class="avatar" aria-hidden="true">JN</div>
+                <div>
+                  <strong>Júlia Nunes</strong
+                  ><span>Head de Sustentabilidade, TerraCorp</span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="section" id="faq">
+        <div class="container container--narrow">
+          <div class="section__head">
+            <p class="eyebrow reveal" data-reveal>
+              <span class="eyebrow__dot"></span> Perguntas frequentes
+            </p>
+            <h2 class="reveal" data-reveal>
+              Tudo o que você <span class="text-gradient">precisa saber.</span>
+            </h2>
+          </div>
+
+          <div class="accordion" id="accordion">
+            <div class="accordion__item reveal" data-reveal>
+              <button class="accordion__trigger" aria-expanded="false">
+                <span>Os tokens do GreenShot valem dinheiro de verdade?</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 12h14M12 5v14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <div class="accordion__panel">
+                <p>
+                  Sim. Os tokens representam valor real, doado e investido
+                  automaticamente em instituições de preservação ambiental
+                  parceiras — você pode acompanhar todo o caminho pelo Painel de
+                  Transparência.
+                </p>
+              </div>
+            </div>
+            <div class="accordion__item reveal" data-reveal>
+              <button class="accordion__trigger" aria-expanded="false">
+                <span>Como a Realidade Aumentada funciona no app?</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 12h14M12 5v14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <div class="accordion__panel">
+                <p>
+                  A câmera do seu celular projeta uma mini floresta ou oceano em
+                  3D sobre o ambiente físico ao seu redor. A saúde desse
+                  ecossistema espelha diretamente seus hábitos diários.
+                </p>
+              </div>
+            </div>
+            <div class="accordion__item reveal" data-reveal>
+              <button class="accordion__trigger" aria-expanded="false">
+                <span>Como minhas ações sustentáveis são validadas?</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 12h14M12 5v14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <div class="accordion__panel">
+                <p>
+                  Por geolocalização, leitura de QR Codes de produtos parceiros
+                  ou envio de fotos com validação assistida por IA na Central de
+                  Registros.
+                </p>
+              </div>
+            </div>
+            <div class="accordion__item reveal" data-reveal>
+              <button class="accordion__trigger" aria-expanded="false">
+                <span>O GreenShot é gratuito?</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 12h14M12 5v14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <div class="accordion__panel">
+                <p>
+                  Sim, o download e o uso essencial são gratuitos. Licenças
+                  premium e o módulo GreenShot for Business oferecem recursos
+                  avançados para usuários e empresas.
+                </p>
+              </div>
+            </div>
+            <div class="accordion__item reveal" data-reveal>
+              <button class="accordion__trigger" aria-expanded="false">
+                <span>Como as ONGs e projetos parceiros são escolhidos?</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 12h14M12 5v14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <div class="accordion__panel">
+                <p>
+                  Passam por um processo de curadoria que avalia transparência,
+                  impacto comprovado e alinhamento com preservação ambiental
+                  antes de entrarem no Mercado de Impacto.
+                </p>
+              </div>
+            </div>
+            <div class="accordion__item reveal" data-reveal>
+              <button class="accordion__trigger" aria-expanded="false">
+                <span>Como funciona o GreenShot for Business?</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 12h14M12 5v14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <div class="accordion__panel">
+                <p>
+                  Empresas patrocinam o fundo de tokens e recebem, em troca,
+                  relatórios consolidados de impacto socioambiental para suas
+                  metas ESG, além de campanhas de engajamento interno.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CTA FINAL ============ -->
+      <section class="cta-final" id="cta-final">
+        <canvas
+          class="cta-final__particles"
+          id="ctaCanvas"
+          aria-hidden="true"
+        ></canvas>
+        <div class="container">
+          <p class="eyebrow reveal" data-reveal>
+            <span class="eyebrow__dot"></span> Comece hoje
+          </p>
+          <h2 class="reveal" data-reveal>
+            Pronto para plantar
+            <span class="text-gradient">mudanças reais?</span>
+          </h2>
+          <p class="section__lead reveal" data-reveal>
+            Baixe o GreenShot e transforme cada escolha do seu dia em um legado
+            que perdura.
+          </p>
+          <div
+            class="hero__actions reveal"
+            data-reveal
+            style="justify-content: center"
+          >
+            <a href="app.html" class="btn btn--primary btn--lg"
+              >Começar Agora</a
+            >
+            <a href="#footer" class="btn btn--ghost btn--lg"
+              >Falar com Nossa Equipe</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer" id="footer">
+      <div class="container">
+        <div class="footer__top">
+          <a href="#top" class="nav__brand">
+            <img
+              src="assets/logo-greenshot.png"
+              alt="GreenShot"
+              width="32"
+              height="36"
+            />
+            <span>GreenShot</span>
+          </a>
+          <p class="footer__tag">
+            Do Aprendizado à Realização, com um Legado que Perdura.
+          </p>
+        </div>
+
+        <div class="footer__grid">
+          <div class="footer__col">
+            <h4>Navegação</h4>
+            <a href="#sobre">Sobre</a>
+            <a href="#funcionalidades">Funcionalidades</a>
+            <a href="#empresas">Empresas</a>
+            <a href="#faq">Contato</a>
+          </div>
+          <div class="footer__col">
+            <h4>Empresa</h4>
+            <a href="#sobre">Nosso propósito</a>
+            <a href="#empresas">GreenShot for Business</a>
+            <a href="#diferenciais">Diferenciais</a>
+          </div>
+          <div class="footer__col">
+            <h4>Siga o GreenShot</h4>
+            <div class="footer__social">
+              <a href="#" aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <rect
+                    x="3"
+                    y="3"
+                    width="18"
+                    height="18"
+                    rx="5"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                  <circle cx="17.2" cy="6.8" r="1" fill="currentColor" />
+                </svg>
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <rect
+                    x="3"
+                    y="3"
+                    width="18"
+                    height="18"
+                    rx="3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                  <path
+                    d="M7.5 10.5v6M7.5 7.7v.03M11.5 16.5v-3.3c0-1.4 1-2.2 2.2-2.2s2.1.8 2.1 2.2v3.3"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </a>
+              <a href="#" aria-label="TikTok">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M14 4v9.4a3.1 3.1 0 1 1-2.6-3.06M14 4c.4 2 1.9 3.4 4 3.6"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <span>© 2026 GreenShot. Todos os direitos reservados.</span>
+          <span>Feito com 🌱 para o planeta.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./service-worker.js")
+            .catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

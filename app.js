@@ -408,7 +408,16 @@
   });
 
   /* ---------- dashboard xp bar ---------- */
+  function checkLevelUp() {
+    if (state.xp >= state.xpMax) {
+      state.xp = 0; // o excedente é perdido ao subir de nível
+      state.level += 1;
+      showToast(`🎉 Você subiu para o nível ${state.level}!`);
+    }
+  }
+
   function animateXp() {
+    checkLevelUp();
     const pct = Math.min(100, (state.xp / state.xpMax) * 100);
     requestAnimationFrame(() => {
       $("#xpFill").style.width = pct + "%";
@@ -435,13 +444,25 @@
   });
 
   /* ---------- toast ---------- */
-  let toastT;
+  let toastQueue = [];
+  let toastBusy = false;
   function showToast(msg) {
+    toastQueue.push(msg);
+    if (!toastBusy) processToastQueue();
+  }
+  function processToastQueue() {
+    if (toastQueue.length === 0) {
+      toastBusy = false;
+      return;
+    }
+    toastBusy = true;
     const t = $("#toast");
-    t.textContent = msg;
+    t.textContent = toastQueue.shift();
     t.classList.add("is-shown");
-    clearTimeout(toastT);
-    toastT = setTimeout(() => t.classList.remove("is-shown"), 2200);
+    setTimeout(() => {
+      t.classList.remove("is-shown");
+      setTimeout(processToastQueue, 250); // pequena pausa entre toasts
+    }, 2200);
   }
 
   /* ---------- ecossistema 3D (Three.js) ---------- */

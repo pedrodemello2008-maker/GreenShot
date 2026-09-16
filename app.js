@@ -10,12 +10,14 @@
 
   const STORAGE_KEY = "greenshot-progress";
   const THEME_KEY = "greenshot-theme";
+  const QUIZ_DAILY_KEY = "greenshot-quiz-daily";
+  const QUIZ_DAILY_LIMIT = 3;
   const DEFAULT_STATE = {
-    xp: 680,
+    xp: 0,
     xpMax: 1000,
-    tokens: 860,
-    level: 7,
-    ecosystemProgress: 30,
+    tokens: 500,
+    level: 1,
+    ecosystemProgress: 0,
   };
 
   const state = {
@@ -562,10 +564,278 @@
       explain:
         "Celulares, carregadores e baterias são e-lixo e precisam de pontos de coleta próprios, por conter metais e componentes tóxicos.",
     },
+    {
+      q: "Qual é a cor correta, na coleta seletiva brasileira, para descarte de papel?",
+      options: ["Azul", "Vermelho", "Verde", "Amarelo"],
+      correct: 0,
+      explain:
+        "O azul é a cor padrão definida para papel e papelão na coleta seletiva no Brasil.",
+    },
+    {
+      q: "De que cor é o coletor destinado a resíduos metálicos (latas, tampas, arames)?",
+      options: ["Verde", "Amarelo", "Preto", "Vermelho"],
+      correct: 1,
+      explain: "O amarelo identifica os resíduos metálicos na coleta seletiva.",
+    },
+    {
+      q: "Restos de frutas, verduras e borra de café devem, idealmente, ser descartados em:",
+      options: [
+        "Lixeira de papel (azul)",
+        "Composteira ou lixeira de orgânicos (marrom)",
+        "Lixeira de vidro (verde)",
+        "Ponto de coleta eletrônico",
+      ],
+      correct: 1,
+      explain:
+        "Resíduos orgânicos podem virar adubo através da compostagem, reduzindo o volume enviado a aterros.",
+    },
+    {
+      q: "Lâmpadas fluorescentes e de LED queimadas devem ser descartadas:",
+      options: [
+        "No lixo comum, normalmente",
+        "Em pontos de coleta especializados, como lojas de materiais de construção",
+        "Junto com o vidro reciclável",
+        "Na pia, dissolvidas em água",
+      ],
+      correct: 1,
+      explain:
+        "Lâmpadas contêm mercúrio e outros componentes tóxicos; muitas lojas e postos oferecem coleta específica para elas.",
+    },
+    {
+      q: "Guardanapos e papéis toalha sujos de comida devem ser descartados como:",
+      options: [
+        "Recicláveis (papel)",
+        "Lixo comum / orgânico",
+        "Compostagem industrial apenas",
+        "E-lixo",
+      ],
+      correct: 1,
+      explain:
+        "Papel contaminado por gordura ou restos de comida não pode ser reciclado e compromete o restante do material; o destino correto é o lixo comum.",
+    },
+    {
+      q: "Isopor (poliestireno expandido, EPS) é:",
+      options: [
+        "Tecnicamente reciclável, mas pouco aceito na coleta seletiva comum",
+        "Sempre aceito em qualquer lixeira reciclável",
+        "Biodegradável em poucos meses",
+        "Proibido de ser produzido no Brasil",
+      ],
+      correct: 0,
+      explain:
+        "O isopor é reciclável, mas exige processos e coletores específicos — por isso poucas cidades o aceitam na coleta seletiva doméstica comum.",
+    },
+    {
+      q: "Pneus usados devem ser descartados:",
+      options: [
+        "No lixo comum, cortados em pedaços",
+        "Em pontos de coleta de borracharias e revendedores (logística reversa)",
+        "Enterrados no quintal",
+        "Queimados para reduzir o volume",
+      ],
+      correct: 1,
+      explain:
+        "Fabricantes e revendedores são obrigados por lei a garantir a destinação correta de pneus, evitando queima (que libera poluentes tóxicos) e acúmulo em locais irregulares (foco de mosquitos).",
+    },
+    {
+      q: "Embalagens longa vida (tipo Tetra Pak, de leite e suco) são compostas principalmente por:",
+      options: [
+        "Apenas plástico",
+        "Apenas papel",
+        "Papel, plástico e uma fina camada de alumínio",
+        "Vidro laminado",
+      ],
+      correct: 2,
+      explain:
+        "Essas embalagens combinam papel, plástico e alumínio, o que exige um processo de reciclagem específico para separar os materiais.",
+    },
+    {
+      q: "Papel alumínio de cozinha, limpo e sem restos de comida, deve ser descartado como:",
+      options: [
+        "Lixo comum",
+        "Reciclável (junto com metais)",
+        "Reciclável (junto com vidro)",
+        "Resíduo perigoso",
+      ],
+      correct: 1,
+      explain:
+        "Quando limpo, o papel alumínio pode ser reciclado junto com os metais; sujo de gordura ou comida, porém, deve ir para o lixo comum.",
+    },
+    {
+      q: "Fraldas descartáveis usadas devem ser descartadas como:",
+      options: [
+        "Recicláveis (papel)",
+        "Lixo comum, não reciclável",
+        "Compostagem doméstica",
+        "Resíduo eletrônico",
+      ],
+      correct: 1,
+      explain:
+        "Por misturar diferentes materiais e conter resíduos orgânicos, fraldas usadas não são recicláveis e vão para o lixo comum.",
+    },
+    {
+      q: "Guardar celulares, carregadores e pilhas antigas em uma gaveta por anos, em vez de descartá-los, é:",
+      options: [
+        "Uma boa prática de armazenamento seguro",
+        "Uma prática comum, mas o ideal é levá-los a um ponto de coleta de e-lixo",
+        "Reciclagem correta por si só",
+        "Obrigatório por lei",
+      ],
+      correct: 1,
+      explain:
+        "Embora não seja perigoso guardar por um tempo, o destino correto é um ponto de coleta de eletrônicos, que recupera metais e evita contaminação se descartado incorretamente no futuro.",
+    },
+    {
+      q: "Nos aterros sanitários, a decomposição de resíduos orgânicos sem tratamento adequado libera principalmente qual gás de efeito estufa?",
+      options: ["Oxigênio", "Metano", "Hidrogênio", "Ozônio"],
+      correct: 1,
+      explain:
+        "O metano, gerado pela decomposição anaeróbica de matéria orgânica em aterros, é um gás de efeito estufa muito mais potente que o CO₂.",
+    },
+    {
+      q: "Na lógica dos '3 Rs' da sustentabilidade, qual deve ser a primeira prioridade?",
+      options: [
+        "Reciclar",
+        "Reduzir o consumo",
+        "Reutilizar embalagens",
+        "Comprar produtos novos recicláveis",
+      ],
+      correct: 1,
+      explain:
+        "A ordem de prioridade é Reduzir, Reutilizar e só então Reciclar — evitar o consumo desnecessário tem impacto ambiental maior do que reciclar o que já foi consumido.",
+    },
+    {
+      q: "Copos plásticos descartáveis de festa geralmente:",
+      options: [
+        "São sempre aceitos na reciclagem comum, sem restrição",
+        "Têm baixa aceitação na reciclagem, pois costumam ser de plástico misto ou de baixo valor",
+        "Devem ser queimados em casa",
+        "São feitos de vidro reciclável",
+      ],
+      correct: 1,
+      explain:
+        "Muitos copos descartáveis são feitos de plásticos de baixo valor comercial ou misturados a outros materiais, o que dificulta a reciclagem — reduzir o uso é a melhor alternativa.",
+    },
+    {
+      q: "O símbolo de um triângulo com um número no fundo de embalagens plásticas indica:",
+      options: [
+        "A validade do produto",
+        "O código de identificação da resina plástica (RIC), útil para a reciclagem",
+        "Que o produto é orgânico",
+        "Que a embalagem é reutilizável até 3 vezes",
+      ],
+      correct: 1,
+      explain:
+        "Esse código numérico (de 1 a 7) identifica o tipo de resina plástica usada, ajudando centrais de triagem a separar o material corretamente.",
+    },
+    {
+      q: "Roupas e tecidos em bom estado que você não usa mais devem, de preferência, ser:",
+      options: [
+        "Descartados no lixo comum",
+        "Doados ou levados a pontos de coleta têxtil",
+        "Queimados",
+        "Misturados ao lixo reciclável de papel",
+      ],
+      correct: 1,
+      explain:
+        "Doação ou pontos de coleta têxtil dão uma segunda vida às roupas e evitam que tecidos ainda úteis sejam parar em aterros.",
+    },
+    {
+      q: "Ao descartar um vidro quebrado, o procedimento mais seguro é:",
+      options: [
+        "Jogar solto direto na lixeira reciclável",
+        "Embrulhar em papel ou jornal antes de descartar, sinalizando o risco",
+        "Descartar na pia com água corrente",
+        "Enterrar no jardim",
+      ],
+      correct: 1,
+      explain:
+        "Embrulhar cacos de vidro evita cortes em quem manuseia o lixo, tanto em casa quanto na coleta.",
+    },
+    {
+      q: "Qual desses itens NÃO deve ser colocado na lixeira de papel reciclável?",
+      options: [
+        "Jornal antigo",
+        "Caixa de papelão limpa",
+        "Papel higiênico usado",
+        "Folha de caderno",
+      ],
+      correct: 2,
+      explain:
+        "Papel higiênico usado é contaminado e não reciclável; o destino correto é o lixo comum.",
+    },
+    {
+      q: "Um chip de celular (SIM card) ou cartão de memória antigo deve ser descartado como:",
+      options: [
+        "Lixo comum",
+        "E-lixo, em ponto de coleta eletrônico",
+        "Reciclável de papel",
+        "Resíduo orgânico",
+      ],
+      correct: 1,
+      explain:
+        "Por conterem metais e componentes eletrônicos, chips e cartões de memória são e-lixo e devem seguir para pontos de coleta especializados.",
+    },
+    {
+      q: "Reduzir o tempo de banho e fechar a torneira ao escovar os dentes são exemplos de:",
+      options: [
+        "Economia de água",
+        "Reciclagem de metais",
+        "Compostagem",
+        "Logística reversa",
+      ],
+      correct: 0,
+      explain:
+        "Pequenas mudanças de hábito no uso da água em casa ajudam a reduzir o consumo diário de forma significativa.",
+    },
   ];
-  const quizState = { index: 0, score: 0, answered: false };
+  const QUIZ_ROUND_SIZE = 5; // quantas perguntas sorteadas por rodada
+
+  function shuffle(arr) {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  /* ---------- limite diário do quiz ---------- */
+  // Data no formato AAAA-MM-DD, em horário local (evita o "vira o dia" errado
+  // que aconteceria usando toISOString, que é em UTC).
+  function todayStr() {
+    return new Date().toLocaleDateString("en-CA");
+  }
+  function loadQuizDaily() {
+    try {
+      const raw = localStorage.getItem(QUIZ_DAILY_KEY);
+      if (raw) {
+        const saved = JSON.parse(raw);
+        if (saved.date === todayStr() && typeof saved.count === "number") {
+          return saved;
+        }
+      }
+    } catch (e) {}
+    return { date: todayStr(), count: 0 };
+  }
+  function saveQuizDaily(data) {
+    try {
+      localStorage.setItem(QUIZ_DAILY_KEY, JSON.stringify(data));
+    } catch (e) {}
+  }
+  let quizDaily = loadQuizDaily();
+
+  const quizState = { index: 0, score: 0, answered: false, questions: [] };
 
   function openQuiz() {
+    quizDaily = loadQuizDaily(); // garante que já resetou se o dia virou
+    if (quizDaily.count >= QUIZ_DAILY_LIMIT) {
+      showToast(
+        `Você já fez o quiz ${QUIZ_DAILY_LIMIT}x hoje — volte amanhã! ⏳`,
+      );
+      return;
+    }
+    quizState.questions = shuffle(QUIZ_QUESTIONS).slice(0, QUIZ_ROUND_SIZE);
     quizState.index = 0;
     quizState.score = 0;
     quizState.answered = false;
@@ -577,8 +847,8 @@
   }
 
   function renderQuizQuestion() {
-    const total = QUIZ_QUESTIONS.length;
-    const item = QUIZ_QUESTIONS[quizState.index];
+    const total = quizState.questions.length;
+    const item = quizState.questions[quizState.index];
     quizState.answered = false;
 
     $("#quizPlay").style.display = "block";
@@ -612,7 +882,7 @@
   function selectQuizOption(i) {
     if (quizState.answered) return;
     quizState.answered = true;
-    const item = QUIZ_QUESTIONS[quizState.index];
+    const item = quizState.questions[quizState.index];
     const opts = $$(".quiz-option");
     opts.forEach((btn) => {
       btn.disabled = true;
@@ -628,14 +898,14 @@
     const nextBtn = $("#quizNextBtn");
     nextBtn.disabled = false;
     nextBtn.textContent =
-      quizState.index === QUIZ_QUESTIONS.length - 1
+      quizState.index === quizState.questions.length - 1
         ? "Ver resultado"
         : "Próxima pergunta";
   }
 
   $("#quizNextBtn").addEventListener("click", () => {
     if (!quizState.answered) return;
-    if (quizState.index < QUIZ_QUESTIONS.length - 1) {
+    if (quizState.index < quizState.questions.length - 1) {
       quizState.index++;
       renderQuizQuestion();
     } else {
@@ -644,11 +914,16 @@
   });
 
   function showQuizResults() {
-    const total = QUIZ_QUESTIONS.length;
+    const total = quizState.questions.length;
     const score = quizState.score;
     const pct = score / total;
-    const xpEarned = Math.round(40 * pct) + 10;
-    const tokensEarned = Math.round(40 * pct) + 5;
+    const isFirstToday = quizDaily.count === 0;
+    const bonus = isFirstToday ? 2 : 1;
+    const xpEarned = (Math.round(40 * pct) + 10) * bonus;
+    const tokensEarned = (Math.round(40 * pct) + 5) * bonus;
+
+    quizDaily.count += 1;
+    saveQuizDaily(quizDaily);
 
     $("#quizPlay").style.display = "none";
     $("#quizResults").style.display = "block";
@@ -656,8 +931,9 @@
       pct === 1 ? "🏆" : pct >= 0.6 ? "🎉" : "🌱";
     $("#quizResultTitle").textContent =
       pct === 1 ? "Gabaritou!" : pct >= 0.6 ? "Mandou bem!" : "Quase lá!";
-    $("#quizResultText").textContent =
-      `Você acertou ${score} de ${total} perguntas sobre descarte correto.`;
+    $("#quizResultText").textContent = isFirstToday
+      ? `Você acertou ${score} de ${total} perguntas — pontos em dobro pela primeira tentativa do dia! 🎉`
+      : `Você acertou ${score} de ${total} perguntas sobre descarte correto.`;
     $("#quizRewardXp").textContent = `+${xpEarned} XP`;
     $("#quizRewardTokens").textContent = `+${tokensEarned} GRST`;
 
@@ -767,6 +1043,8 @@
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch (e) {}
+    quizDaily = { date: todayStr(), count: 0 };
+    saveQuizDaily(quizDaily);
     if (authUser) {
       // Também zera o progresso salvo na nuvem desta conta.
       cloud.saveUserData(authUser.uid, {
